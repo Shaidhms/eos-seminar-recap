@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EOS Seminar Recap — Entrepreneur Operating System | May 10, 2026</title>
+
+<!-- ============== SOFT GATE — keep this script first in <head> ============== -->
+<style id="eos-gate-style">html { opacity: 0; transition: opacity 0.15s; }</style>
+<script>
+(function() {
+  var STORAGE_KEY = 'eos_unlocked_v1';
+  var TTL_MS = 30 * 24 * 60 * 60 * 1000;
+  var GATEWAY_URL = '../';
+  function unlock() {
+    document.documentElement.style.opacity = '1';
+    var s = document.getElementById('eos-gate-style');
+    if (s) s.remove();
+  }
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var urlKey = params.get('key');
+    if (urlKey && urlKey.length >= 8 && /^[A-Za-z0-9_-]+$/.test(urlKey)) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ key: urlKey, ts: Date.now() }));
+      params.delete('key');
+      var clean = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+      history.replaceState(null, '', clean);
+      unlock();
+      return;
+    }
+  } catch (e) {}
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      var stored = JSON.parse(raw);
+      if (stored && stored.key && (Date.now() - stored.ts) < TTL_MS) {
+        unlock();
+        return;
+      }
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  } catch (e) {}
+  window.location.replace(GATEWAY_URL);
+})();
+</script>
+<!-- ============== END SOFT GATE ============== -->
+
+<meta name="description" content="A visual, illustrated recap of the EOS (Entrepreneur Operating System) seminar by Dharaneetharan G D, Social Eagle. Lessons, frameworks, the 8 pillars, member results and the journey from 2015 to 2026." />
+<link rel="icon" type="image/png" sizes="256x256" href="../assets/favicon-256.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#dc2626" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #faf9f6;
+    --bg-2: #ffffff;
+    --ink: #0a0a0a;
+    --ink-2: #1a1a1a;
+    --muted: #5a5a5a;
+    --line: #e8e6e0;
+    --red: #dc2626;
+    --red-2: #b91c1c;
+    --gold: #c9a227;
+    --green: #16a34a;
+    --blue: #1e40af;
+    --shadow: 0 24px 60px -24px rgba(10,10,10,0.18);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  /* RAY BACKGROUND inspired by seminar slides */
+  .rays {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      conic-gradient(from 90deg at 50% 100%,
+        transparent 0deg,
+        rgba(0,0,0,0.04) 4deg,
+        transparent 8deg,
+        rgba(0,0,0,0.05) 12deg,
+        transparent 16deg,
+        rgba(0,0,0,0.03) 20deg,
+        transparent 24deg,
+        rgba(0,0,0,0.05) 30deg,
+        transparent 36deg,
+        rgba(0,0,0,0.03) 44deg,
+        transparent 50deg,
+        rgba(0,0,0,0.04) 60deg,
+        transparent 70deg,
+        rgba(0,0,0,0.03) 80deg,
+        transparent 90deg,
+        rgba(0,0,0,0.05) 100deg,
+        transparent 110deg,
+        rgba(0,0,0,0.03) 120deg,
+        transparent 130deg,
+        rgba(0,0,0,0.04) 140deg,
+        transparent 150deg,
+        rgba(0,0,0,0.05) 160deg,
+        transparent 170deg,
+        rgba(0,0,0,0.03) 180deg);
+    mask-image: radial-gradient(ellipse at 50% 110%, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 110%, black 30%, transparent 75%);
+    opacity: 0.6;
+  }
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex; gap: 4px;
+    padding: 6px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 999px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .nav.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(-12px); }
+  .nav a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+    letter-spacing: -0.01em;
+  }
+  .nav a:hover { background: rgba(0,0,0,0.05); }
+  .nav a.cta { background: var(--ink); color: white; }
+  .nav a.cta:hover { background: var(--red); color: white; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    overflow: hidden;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 999px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; background: var(--red);
+    border-radius: 50%;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.5; }
+  }
+  .hero h1 {
+    font-size: clamp(56px, 12vw, 180px);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.92;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, var(--ink) 30%, #444 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero h1 .accent {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--red);
+    -webkit-text-fill-color: var(--red);
+    letter-spacing: -0.02em;
+  }
+  .hero-emblem {
+    width: clamp(220px, 38vw, 480px);
+    margin: 0 auto 28px;
+    display: block;
+    filter: drop-shadow(0 12px 32px rgba(0,0,0,0.08));
+    animation: emblem-in 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    mix-blend-mode: multiply;
+  }
+  @keyframes emblem-in {
+    from { opacity: 0; transform: translateY(-12px) scale(0.92); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .hero h1.tagline {
+    font-size: clamp(28px, 4.5vw, 56px);
+    line-height: 1.05;
+    background: none;
+    color: var(--ink);
+    -webkit-text-fill-color: var(--ink);
+    margin-bottom: 18px;
+    letter-spacing: -0.03em;
+  }
+  .hero h1.tagline .accent {
+    color: var(--red);
+    -webkit-text-fill-color: var(--red);
+  }
+  .hero-sub {
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto 48px;
+    font-weight: 400;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+  .meta-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  .meta-pill svg { width: 14px; height: 14px; }
+  .scroll-cue {
+    position: absolute;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-cue .line {
+    width: 1px; height: 32px;
+    background: linear-gradient(180deg, var(--ink), transparent);
+    animation: scrolldrop 2s ease-in-out infinite;
+  }
+  @keyframes scrolldrop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* SECTION SHARED */
+  section {
+    position: relative;
+    padding: 120px 24px;
+  }
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--red);
+  }
+  .section-title {
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .section-title em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--red);
+  }
+  .section-lede {
+    font-size: clamp(17px, 1.5vw, 20px);
+    color: var(--muted);
+    max-width: 680px;
+    line-height: 1.6;
+  }
+  .section-head { margin-bottom: 64px; }
+
+  /* Speaker section */
+  .speaker {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .speaker-card {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #fff 0%, #faf9f6 100%);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+  }
+  .speaker-card .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+  .speaker-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.85) 100%);
+    pointer-events: none;
+  }
+  .speaker-card .badge {
+    position: absolute;
+    top: 24px; left: 24px;
+    background: var(--red);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    z-index: 2;
+  }
+  .speaker-card .info {
+    position: absolute;
+    bottom: 32px; left: 32px; right: 32px;
+    color: white;
+    z-index: 2;
+  }
+  .speaker-card .info h3 {
+    font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .speaker-card .info p {
+    color: rgba(255,255,255,0.85); font-size: 14px;
+  }
+  .speaker-content h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .speaker-content p {
+    font-size: 17px;
+    color: var(--ink-2);
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  .speaker-content p .hl {
+    background: linear-gradient(180deg, transparent 60%, rgba(220,38,38,0.18) 60%);
+    padding: 0 2px;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 24px; bottom: 24px;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--ink) 8%, var(--ink) 92%, transparent);
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 80px 80px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .tl-item.visible { opacity: 1; transform: translateY(0); }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item .dot {
+    position: absolute;
+    left: 18px; top: 8px;
+    width: 22px; height: 22px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .tl-item .dot::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--red);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.5s 0.2s ease;
+  }
+  .tl-item.visible .dot::after { transform: scale(1); }
+  .tl-year {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .tl-title {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .tl-body {
+    font-size: 16.5px;
+    color: var(--ink-2);
+    margin-bottom: 24px;
+    max-width: 620px;
+    line-height: 1.65;
+  }
+  .tl-image {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: white;
+    max-width: 560px;
+    box-shadow: 0 14px 40px -16px rgba(0,0,0,0.18);
+  }
+  .tl-image img {
+    width: 100%; height: auto; display: block;
+  }
+
+  /* PRINCIPLES (motto cards) */
+  .mottos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .motto {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .motto:hover {
+    transform: translateY(-6px);
+    border-color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+  .motto .formula {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .motto .formula .op { color: var(--red); margin: 0 6px; }
+  .motto h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .motto p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* QUOTES */
+  .quotes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .quote-card {
+    padding: 40px 36px;
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-card.alt { background: var(--bg-2); color: var(--ink); border: 1px solid var(--line); }
+  .quote-card .qmark {
+    font-family: 'Instrument Serif', serif;
+    font-size: 96px;
+    line-height: 0.5;
+    position: absolute;
+    top: 36px; right: 32px;
+    opacity: 0.15;
+  }
+  .quote-card blockquote {
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    max-width: 520px;
+  }
+  .quote-card cite {
+    font-style: normal;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* FAILURE REASONS */
+  .reasons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .reason {
+    padding: 36px 32px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease;
+    position: relative;
+    cursor: default;
+  }
+  .reason:hover { background: rgba(0,0,0,0.025); }
+  .reason .num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 38px;
+    font-weight: 400;
+    color: var(--red);
+    line-height: 1;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .reason h4 {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .reason p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PILLARS */
+  .pillars-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .pillar {
+    aspect-ratio: 1/1.15;
+    border-radius: var(--radius);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--red), #1a1a1a);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .pillar:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow);
+  }
+  .pillar:hover::before { opacity: 1; }
+  .pillar:hover .pillar-num,
+  .pillar:hover .pillar-title,
+  .pillar:hover .pillar-body { color: white; }
+  .pillar:hover .pillar-icon { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+  .pillar:hover .pillar-icon svg { stroke: white; }
+  .pillar > * { position: relative; z-index: 2; transition: color 0.4s ease; }
+  .pillar-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .pillar-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+  .pillar-icon svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 1.6; transition: stroke 0.4s ease; }
+  .pillar-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .pillar-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* RESULTS */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .result {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .result:hover {
+    transform: translateY(-4px);
+    border-color: var(--ink);
+  }
+  .result .name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .result .domain {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .result .stat-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .result .from {
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .result .arrow {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .result .to {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+  .result .to .unit { font-size: 16px; font-weight: 600; color: var(--muted); margin-left: 2px; }
+  .result .growth {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background: rgba(22,163,74,0.12);
+    color: var(--green);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* COUNTER STATS */
+  .counters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 64px;
+  }
+  .counter {
+    text-align: center;
+  }
+  .counter .num {
+    font-size: clamp(40px, 5.5vw, 72px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(180deg, var(--ink) 0%, var(--red) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .counter .label {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* OFFER */
+  .offer {
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: white;
+    border-radius: 28px;
+    padding: 80px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .offer::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(220,38,38,0.25), transparent 60%);
+    top: -200px; right: -200px;
+    pointer-events: none;
+  }
+  .offer-eyebrow {
+    color: var(--red);
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    position: relative; z-index: 2;
+  }
+  .offer h2 {
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    position: relative; z-index: 2;
+  }
+  .offer h2 em {
+    font-family: 'Instrument Serif', serif; font-style: italic; color: var(--red); font-weight: 400;
+  }
+  .offer-lede {
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    max-width: 580px;
+    margin-bottom: 56px;
+    position: relative; z-index: 2;
+  }
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative; z-index: 2;
+  }
+  .price-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 32px 28px;
+    transition: all 0.4s ease;
+  }
+  .price-card.featured {
+    border-color: var(--red);
+    background: rgba(220,38,38,0.06);
+  }
+  .price-card .tier {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 12px;
+  }
+  .price-card.featured .tier { color: var(--red); }
+  .price-card .strike {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .price-card .price {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-card .price .gst {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-left: 6px;
+  }
+  .price-card .save {
+    display: inline-block;
+    background: rgba(22,163,74,0.18);
+    color: #22c55e;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+  .price-card .desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.55;
+  }
+
+  /* SCHEDULE */
+  .schedule {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 56px;
+  }
+  .schedule-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 22px;
+    position: relative;
+  }
+  .schedule-card.kick {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .schedule-card.kick .month, .schedule-card.kick .label { color: white; }
+  .schedule-card.kick .meta { color: rgba(255,255,255,0.6); }
+  .schedule-card .month {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 10px;
+  }
+  .schedule-card .label {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .schedule-card .meta {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* COMMUNITY EXPERIENCES */
+  .experiences {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .exp {
+    aspect-ratio: 5/4;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+    cursor: default;
+    transition: transform 0.4s ease;
+  }
+  .exp:hover { transform: translateY(-6px); }
+  .exp.tn { background: linear-gradient(135deg, #4c1d95, #6d28d9); }
+  .exp.rcl { background: linear-gradient(135deg, #b91c1c, #ea580c); }
+  .exp.eos-card { background: linear-gradient(135deg, #0a0a0a, #2a2a2a); }
+  .exp-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .exp h3 {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .exp p {
+    font-size: 14px; opacity: 0.85; line-height: 1.5;
+  }
+
+  /* TEACHER MOMENT */
+  .teacher-block {
+    background: linear-gradient(180deg, #faf9f6 0%, #fff 100%);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 80px 56px;
+    text-align: center;
+  }
+  .teacher-block .pre {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .teacher-block .red {
+    color: var(--red);
+  }
+  .teacher-block .why {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(64px, 10vw, 120px);
+    color: var(--red);
+    font-style: italic;
+    line-height: 1;
+    margin: 30px 0 20px;
+  }
+  .teacher-block .answer {
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--ink-2);
+  }
+
+  /* SPARKS */
+  .sparks-wrap {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 32px;
+  }
+  .spark-pill {
+    padding: 10px 18px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    transition: all 0.3s ease;
+  }
+  .spark-pill:hover {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 60px 24px;
+    background: var(--bg);
+    text-align: center;
+  }
+  footer .container { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  footer .logo {
+    font-size: 22px; font-weight: 900; letter-spacing: -0.03em;
+  }
+  footer .logo .red { color: var(--red); }
+  footer p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer .social {
+    display: flex; gap: 18px; margin-top: 8px;
+  }
+  footer .social a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  footer .social a:hover { color: var(--red); }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .stagger.visible > * { opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .stagger.visible > *:nth-child(2) { transition-delay: 0.10s; }
+  .stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
+  .stagger.visible > *:nth-child(4) { transition-delay: 0.20s; }
+  .stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
+  .stagger.visible > *:nth-child(6) { transition-delay: 0.30s; }
+  .stagger.visible > *:nth-child(7) { transition-delay: 0.35s; }
+  .stagger.visible > *:nth-child(8) { transition-delay: 0.40s; }
+
+  /* PILLAR WALKTHROUGH (progressive slideshow) */
+  .pw {
+    margin-top: 56px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+  }
+  .pw-progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+  .pw-progress .dot {
+    flex: 1;
+    height: 4px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+  .pw-progress .dot:hover { background: rgba(0,0,0,0.15); }
+  .pw-progress .dot.done { background: var(--ink); }
+  .pw-progress .dot.active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--red);
+    transform: translateX(-100%);
+    animation: progress-fill var(--auto-ms, 6000ms) linear forwards;
+  }
+  .pw-progress.paused .dot.active::after { animation-play-state: paused; }
+  @keyframes progress-fill {
+    to { transform: translateX(0); }
+  }
+  .pw-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 32px;
+    align-items: start;
+  }
+  .pw-image {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: white;
+    aspect-ratio: 1695/968;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    align-self: start;
+  }
+  .pw-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    background: white;
+  }
+  .pw-image img.show { opacity: 1; }
+  .pw-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 8px 0;
+    min-width: 0;
+  }
+  .pw-eyebrow {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px;
+  }
+  .pw-eyebrow .num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--red);
+    letter-spacing: -0.04em;
+    transition: color 0.5s ease;
+  }
+  .pw-eyebrow .of {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .pw-title {
+    font-size: clamp(28px, 3.4vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .pw-frameworks {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+    align-content: start;
+  }
+  .pw-frameworks li {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.45;
+    padding-left: 14px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .pw-frameworks.in li { opacity: 1; transform: translateY(0); }
+  .pw-frameworks.in li:nth-child(1) { transition-delay: 0.05s; }
+  .pw-frameworks.in li:nth-child(2) { transition-delay: 0.10s; }
+  .pw-frameworks.in li:nth-child(3) { transition-delay: 0.15s; }
+  .pw-frameworks.in li:nth-child(4) { transition-delay: 0.20s; }
+  .pw-frameworks.in li:nth-child(5) { transition-delay: 0.25s; }
+  .pw-frameworks.in li:nth-child(6) { transition-delay: 0.30s; }
+  .pw-frameworks.in li:nth-child(7) { transition-delay: 0.35s; }
+  .pw-frameworks.in li:nth-child(8) { transition-delay: 0.40s; }
+  .pw-frameworks.in li:nth-child(9) { transition-delay: 0.45s; }
+  .pw-frameworks.in li:nth-child(10) { transition-delay: 0.50s; }
+  .pw-frameworks.in li:nth-child(11) { transition-delay: 0.55s; }
+  .pw-frameworks.in li:nth-child(12) { transition-delay: 0.60s; }
+  .pw-frameworks li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7px;
+    width: 5px; height: 5px;
+    background: var(--accent, var(--red));
+    border-radius: 50%;
+  }
+  .pw-controls {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .pw-controls .pw-counter {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(calc(-50% + 12px));
+  }
+  .pw-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--ink);
+  }
+  .pw-btn:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: white;
+    transform: translateY(-2px);
+  }
+  .pw-btn svg { width: 18px; height: 18px; fill: currentColor; }
+  .pw-playbtn {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+    width: 52px; height: 52px;
+  }
+  .pw-playbtn:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
+  .pw-counter {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .pw-counter strong { color: var(--ink); font-size: 16px; }
+
+  /* PILLAR MODAL */
+  .pillar-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .pillar-modal.open { display: flex; }
+  .pillar-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadein 0.3s ease;
+  }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .pillar-modal-card {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    width: 100%;
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    animation: scalein 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes scalein {
+    from { transform: scale(0.94); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .pillar-modal-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+  }
+  .pillar-modal-close {
+    position: absolute;
+    top: -50px; right: 0;
+    width: 40px; height: 40px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+  }
+  .pillar-modal-close:hover { transform: rotate(90deg); }
+
+  .pillar[data-detail] { cursor: pointer; }
+  .pillar[data-detail]::after {
+    content: '↗';
+    position: absolute;
+    top: 18px; right: 18px;
+    font-size: 16px;
+    color: var(--muted);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+  }
+  .pillar[data-detail]:hover::after { opacity: 1; color: white; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1080px) {
+    .pw-stage { grid-template-columns: 1fr; gap: 24px; }
+    .pw-image { aspect-ratio: 1695/968; }
+    .pw { padding: 24px; }
+    .pw-frameworks { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    section { padding: 80px 20px; }
+    .speaker { grid-template-columns: 1fr; gap: 32px; }
+    .speaker-card { aspect-ratio: 4/3; }
+    .quotes { grid-template-columns: 1fr; }
+    .reasons { grid-template-columns: 1fr; }
+    .pillars-wrap { grid-template-columns: 1fr 1fr; }
+    .pw-frameworks { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .pricing { grid-template-columns: 1fr; }
+    .schedule { grid-template-columns: 1fr 1fr; }
+    .experiences { grid-template-columns: 1fr; }
+    .counters { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
+    .offer { padding: 56px 28px; }
+    .teacher-block { padding: 56px 28px; }
+    .nav { font-size: 11px; }
+    .nav a { padding: 6px 10px; font-size: 11px; }
+    .nav a:not(.cta) { display: none; }
+    .nav a.cta { display: inline-block; }
+  }
+  @media (max-width: 600px) {
+    .pillars-wrap { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .schedule { grid-template-columns: 1fr; }
+    .timeline::before { left: 10px; }
+    .tl-item { padding-left: 50px; }
+    .tl-item .dot { left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#journey">Journey</a>
+  <a href="#principles">Principles</a>
+  <a href="#eos-reveal">EOS</a>
+  <a href="#pillars">8 Pillars</a>
+  <a href="#results">Results</a>
+  <a href="#offer" class="cta">The Offer</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="rays"></div>
+  <div class="grid-bg"></div>
+  <div class="hero-eyebrow"><span class="dot"></span> Live Seminar Recap · 10 May 2026</div>
+  <img class="hero-emblem" src="../assets/35-eos-emblem.png" alt="EOS — Entrepreneur Operating System emblem" />
+  <h1 class="tagline">An <span class="accent">illustrated recap</span> of the seminar.</h1>
+  <p class="hero-sub">A visual, illustrated recap of the live workshop by <strong>Dharaneetharan G&nbsp;D</strong> — Social Eagle. From a single yes in 2015 to an operating system for serious entrepreneurs in 2026.</p>
+  <div class="hero-meta">
+    <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> May 10, 2026 · Sunday</span>
+    <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> 50+ doubled revenue</span>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<!-- SPEAKER -->
+<section id="speaker">
+  <div class="container speaker reveal">
+    <div class="speaker-card">
+      <img class="photo" src="../assets/00-dharani-portrait.jpg" alt="Dharaneetharan G D, Founder of Social Eagle" />
+      <span class="badge">FOUNDER · SPEAKER</span>
+      <div class="info">
+        <h3>Dharaneetharan G D</h3>
+        <p>Founder, Social Eagle · Singapore + India · 2015 → Present</p>
+      </div>
+    </div>
+    <div class="speaker-content">
+      <div class="section-eyebrow">Who showed up on stage</div>
+      <h2>Trend-spotter. Builder. Teacher of the next-gen entrepreneur.</h2>
+      <p>This isn't a polished pitch. It's the <span class="hl">raw truth and pure hustle</span> of a man who said <em>yes</em> before he knew how — to running ads in 2015, to global clients in 2017, to going fully digital before COVID even arrived.</p>
+      <p>Across 50 minutes, Dharani walks the room through the moves, the misses, the frameworks, and the entrepreneur operating system he's spent five years building so that 78 members and counting can stop firefighting and start scaling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY TIMELINE -->
+<section id="journey">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The Journey</div>
+      <h2 class="section-title">From a single <em>yes</em>,<br>to an ecosystem.</h2>
+      <p class="section-lede">When the opportunity comes in front of you, even if you don't know how to pull it off — say yes, then figure it out. That's the through-line of every milestone below.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2015 · Inception</div>
+        <h3 class="tl-title">A Facebook friend asked: "Can you run ads for my client?"</h3>
+        <p class="tl-body">No deck, no agency, no client list. Just a yes. With Satish Ram and mentor CKK, Social Eagle was born — proof that if you have the courage to take the chance, the chance becomes yours.</p>
+        <div class="tl-image"><img src="../assets/01-2015-inception.png" alt="2015 Inception of Social Eagle" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2016 · Agency + Academy</div>
+        <h3 class="tl-title">Customers asked the question that built the academy.</h3>
+        <p class="tl-body">A client said: "We can't afford to renew month-on-month — can you teach us instead?" One month later, they were running their own ads. The training arm grew out of the listening, not the planning.</p>
+        <div class="tl-image"><img src="../assets/03-2016-academy.png" alt="2016 Social Eagle Agency and Academy" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2016 — Trend spotted early</div>
+        <h3 class="tl-title">Posting "2-minute videos will be king" — back when Instagram was image-only.</h3>
+        <p class="tl-body">April 12, 2016. The receipts are still on Facebook. Spotting the trend before it becomes the trend is the lever middle-class entrepreneurs have to ride to make a fortune.</p>
+        <div class="tl-image"><img src="../assets/06-fb-posts.png" alt="Early Facebook posts predicting video and clarity" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2017 · Singapore</div>
+        <h3 class="tl-title">Big leap: international clients, global standards.</h3>
+        <p class="tl-body">Nature Valley. Häagen-Dazs. Nestlé. Singapore Management University. ASUS. Merries. Starting earlier than the local market expected meant clients shaped the agency more than the agency shaped itself.</p>
+        <div class="tl-image"><img src="../assets/05-big-leap.png" alt="Big leap with Singapore clients SMU, Merries, ASUS" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">15 March 2020 · The pivot</div>
+        <h3 class="tl-title">Heard a virus story from a friend in Hong Kong. Decided to go fully online — fast.</h3>
+        <p class="tl-body">While the country was switching off lights, Dharani was building courses. Landing pages. LinkedIn playbooks. Video systems. On 11 May 2020 the first 21-day digital training went live with 44 → 53 organic registrations and zero ad spend.</p>
+        <div class="tl-image"><img src="../assets/07-live-sessions.png" alt="2020 Live training sessions during COVID" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2020–21 · The community forms</div>
+        <h3 class="tl-title">494 people live at 5 AM. A book with Vikatan. ₹4.5 Cr orders in a single day.</h3>
+        <p class="tl-body">Eleven batches in. Members quitting jobs. Members buying their first car. Members crossing ₹1 lakh, ₹12 lakh, ₹1 crore. The first message they'd send was always to Dharani — they'd written him into their happiness.</p>
+        <div class="tl-image"><img src="../assets/04-bootcamp.png" alt="Business Bootcamp by Social Eagle" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">Trainings & global associations</div>
+        <h3 class="tl-title">Certified across the best of the best.</h3>
+        <p class="tl-body">Dale Carnegie. Tony Robbins (Unleash The Power Within). Grant Cardone. Maxwell Leadership. Consulting.com. The Fletcher Method. Awarded the 7 Habits Trainer credential by Sean Covey himself — son of Stephen Covey.</p>
+        <div class="tl-image"><img src="../assets/09-trainings.png" alt="Trainings and certifications" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2025 · Recognition</div>
+        <h3 class="tl-title">Leader-in-Me award. Vikatan Startup Stars. BlackSweep recognition.</h3>
+        <p class="tl-body">Recognition received from his MIT professor and Sean Covey on stage. The trophies don't make the system — but they validate the responsibility a teacher carries: <em>training is the place that brings transformation.</em></p>
+        <div class="tl-image"><img src="../assets/08-leader-in-me.png" alt="Leader in Me Convex award" /></div>
+      </div>
+
+      <div class="tl-item">
+        <span class="dot"></span>
+        <div class="tl-year">2026 · Customer-obsessed brand</div>
+        <h3 class="tl-title">No push selling. The product positions itself.</h3>
+        <p class="tl-body">Five years of iteration later, Social Eagle has evolved into a customer-obsessed brand — one where transformation is the marketing, and the next bet is a year-long operating system for serious entrepreneurs.</p>
+        <div class="tl-image"><img src="../assets/10-customer-obsessed.png" alt="Evolved into a Customer Obsessed Brand" /></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES / FORMULAS -->
+<section id="principles" style="background: linear-gradient(180deg, var(--bg) 0%, #fff 50%, var(--bg) 100%);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The Mental Models</div>
+      <h2 class="section-title">Six formulas Dharani <em>actually</em> lives by.</h2>
+      <p class="section-lede">No fluff. These are the operating equations the room kept hearing again and again. Print them. Tape them. Use them.</p>
+    </div>
+
+    <div class="mottos stagger">
+      <div class="motto">
+        <div class="formula">P <span class="op">=</span> O</div>
+        <h4>Problem equals Opportunity</h4>
+        <p>Every problem you can name carries an opportunity at the same address. AI laying you off? Opportunity. Heavy competition? Opportunity. Look there first.</p>
+      </div>
+      <div class="motto">
+        <div class="formula">L <span class="op">=</span> D</div>
+        <h4>Learning equals Doing</h4>
+        <p>The differentiation factor that existed three years ago is no longer one. Today, learning and doing must happen <em>in parallel</em>. Don't wait to know — implement while you learn.</p>
+      </div>
+      <div class="motto">
+        <div class="formula">EA</div>
+        <h4>Early Adoption</h4>
+        <p>Middle-class fortunes are made by riding the wave before it crests. Find the trend before others see it. Video in 2016. Online in 2020. AI in 2023. What's next?</p>
+      </div>
+      <div class="motto">
+        <div class="formula">TLP</div>
+        <h4>Time + Tech + People = Leverage</h4>
+        <p>Other people's effort. Other people's tech. Other people's money. Other people's data. If you're working without leverage, you're working twice as hard for half as much.</p>
+      </div>
+      <div class="motto">
+        <div class="formula">N×M</div>
+        <h4>N customers buying M times</h4>
+        <p>Don't chase one. Build for N customers buying M times. Repeatable revenue beats heroic single sales — every time, in every market.</p>
+      </div>
+      <div class="motto">
+        <div class="formula">GG</div>
+        <h4>Growth lives where customers expect</h4>
+        <p>Listen. Always listen. Whatever they're asking you for next is the place your business is supposed to grow into. The academy was born from a customer's question.</p>
+      </div>
+    </div>
+
+    <div class="quotes">
+      <div class="quote-card">
+        <span class="qmark">"</span>
+        <blockquote>If you respect your business, your business respects you. If you respect your wife, your wife respects you. <strong>What you respect, that respects you.</strong></blockquote>
+        <cite>— On the freedom that comes with being a business owner</cite>
+      </div>
+      <div class="quote-card alt">
+        <span class="qmark">"</span>
+        <blockquote>Money will solve 80% of your money problems. The remaining 20% can be solved with <strong>more money.</strong></blockquote>
+        <cite>— On building wealth without apology</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAILURE REASONS -->
+<section id="failure">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Why Most Businesses Stay Stuck</div>
+      <h2 class="section-title">The <em>fourteen</em> reasons Dharani named, in order.</h2>
+      <p class="section-lede">Not a generic list — these are the exact 14 numbered failure patterns Dharani walked through on stage, slide by slide. Read them honestly. The first reason most owners fail isn't strategy — it's motivation.</p>
+    </div>
+
+    <div class="reasons stagger">
+      <div class="reason">
+        <span class="num">01</span>
+        <h4>Lack of Continued Motivation</h4>
+        <p>The fire dies. Day-1 energy fades by month three. Without a system that re-ignites you weekly, every business eventually flatlines — irrespective of how strong the start was.</p>
+      </div>
+      <div class="reason">
+        <span class="num">02</span>
+        <h4>Lack of Support System</h4>
+        <p>Family, friends, ecosystem — most entrepreneurs are surrounded by doubters, not believers. "You can't do it. Can you do it from your background?" Mentorship and a peer mastermind are not luxuries — they're life-support.</p>
+      </div>
+      <div class="reason">
+        <span class="num">03</span>
+        <h4>Lack of Proven Framework</h4>
+        <p>You're guessing. Trial-and-error is expensive education. Borrow a battle-tested framework from someone who's already done it; don't invent your own from scratch.</p>
+      </div>
+      <div class="reason">
+        <span class="num">04</span>
+        <h4>Unwilling to Take Positive Pressure</h4>
+        <p>Comfort kills more businesses than competition. If no one is pushing you, you'll default to the easiest version of yourself. Being put under healthy positive pressure is a privilege.</p>
+      </div>
+      <div class="reason">
+        <span class="num">05</span>
+        <h4>Lack of Consistency</h4>
+        <p>"This is where we have failed." Twenty years, thirty years — same business, same plateau. Without consistency in posting, in selling, in showing up, scale is impossible. Build the system, or hire someone to do it 80% of the time for you.</p>
+      </div>
+      <div class="reason">
+        <span class="num">06</span>
+        <h4>Limiting Beliefs</h4>
+        <p>"I'm middle class." "I'm not technical." "I came in late." These voices live in your head before they ever live in the market. Break the ceiling thinking — abundance is a decision before it's a result.</p>
+      </div>
+      <div class="reason">
+        <span class="num">07</span>
+        <h4>Lack of Clarity</h4>
+        <p>You don't know where you're going — so any direction feels equally valid. Without clarity on what you want and by when, you'll burn fuel circling the same problem for years.</p>
+      </div>
+      <div class="reason">
+        <span class="num">08</span>
+        <h4>Lack of Speed of Implementation</h4>
+        <p>You know there's a problem. You know there's a solution. You're not taking the step. The Tamil word he used — <em>"Kuluppu"</em>. Confusion. Comfort zone. Procrastination dressed up as planning.</p>
+      </div>
+      <div class="reason">
+        <span class="num">09</span>
+        <h4>Risk vs Calculated Risk</h4>
+        <p>Either you take no risk and stagnate, or you take wild risks and collapse. The middle path is <em>cognitive risk</em> — measured bets, tested fast, sized to the lesson, not the loss.</p>
+      </div>
+      <div class="reason">
+        <span class="num">10</span>
+        <h4>Lack of Leverage</h4>
+        <p>Other people's effort. Technology leverage. Marketing leverage. Money leverage. Data leverage. Idea leverage. Most owners run their businesses with zero leverage — which is why they can't put the engine down.</p>
+      </div>
+      <div class="reason">
+        <span class="num">11</span>
+        <h4>Not Learning About Money Mindset</h4>
+        <p>Top 10%, top 4%, top 1% — you have to be observing a lot of things, with crystal clarity on what you want. From where you are, with what you have. In the moment. Not "if it comes, let it come".</p>
+      </div>
+      <div class="reason">
+        <span class="num">12</span>
+        <h4>Lack of Resourcefulness</h4>
+        <p>Resources aren't the problem — resourcefulness is. With what you have, from where you are, in your own neighbourhood, in the southern entertainment range — go implement that learning.</p>
+      </div>
+      <div class="reason">
+        <span class="num">13</span>
+        <h4>Lack of Right Knowledge</h4>
+        <p>Algorithms have already become poisonous. Even a "good" video can be a distraction. Read the right kind of books, associate with the right kind of people, and refuse the dopamine-loop knowledge that doesn't move your business forward.</p>
+      </div>
+      <div class="reason">
+        <span class="num">14</span>
+        <h4>Not Spending on Marketing or Sales</h4>
+        <p>Marketing is not a waste of time — marketing is <em>investment</em>. If you're not running ads, you are failing in your business. Know when to fight and when not to fight. That's where leverage, digital and content come in.</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="margin-top: 32px; padding: 24px 28px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; font-size: 14.5px; color: var(--ink-2); line-height: 1.6;"><strong style="color: var(--red);">Two more from the offer-side of the seminar →</strong> <em>Lack of Product–Market Fit</em> (red ocean trap, no blue ocean angle) and <em>Ceiling Thinking</em> (the abundance gap — "if someone with no degree can become Chief Minister, what's stopping you?"). EOS is built specifically to solve all of these — in order.</p>
+
+    <div class="reveal" style="margin-top: 56px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow);">
+      <img src="../assets/29-eagle-methodology.jpg" alt="The Eagle Methodology of Teaching — Online + Offline + Cohort + Community + Course + Accountability + Framework + Tools + Zone = Wins" style="width: 100%; height: auto; display: block;" />
+    </div>
+    <p class="reveal" style="text-align: center; margin-top: 12px; font-size: 13.5px; color: var(--muted); font-style: italic;">The antidote — the Eagle Methodology of Teaching. Nine ingredients, one outcome.</p>
+  </div>
+</section>
+
+<!-- COMMUNITY EXPERIENCES -->
+<section id="community">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Community Experiences</div>
+      <h2 class="section-title">Three flagship rooms <em>where lives change.</em></h2>
+      <p class="section-lede">Beyond ads, content, and consulting — Social Eagle runs three flagship community experiences that participants describe as turning points.</p>
+    </div>
+
+    <div class="experiences stagger">
+      <div class="exp tn">
+        <span class="exp-tag">2-Day Offline · Get Exposed</span>
+        <h3>Tamil Nadu Digital Summit</h3>
+        <p>Two days of ideas, people, and opportunities to scale your business — events, networking and real insights from the front lines.</p>
+      </div>
+      <div class="exp rcl">
+        <span class="exp-tag">2-Day Offline · Rebuild You</span>
+        <h3>Reclaim Your Life</h3>
+        <p>Two days to take back control of your life — mindset, habits, and energy systems for the entrepreneur version of you.</p>
+      </div>
+      <div class="exp eos-card">
+        <span class="exp-tag">12-Month Operating System</span>
+        <h3>EOS</h3>
+        <p>Coaching, events and masterminds to help you build and scale your business without you working as much as you do today.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px;" class="reveal">
+      <div class="tl-image" style="max-width: 100%; margin: 0 auto;"><img src="../assets/14-social-eagle-community.png" alt="The Social Eagle Community ecosystem" /></div>
+      <p style="text-align: center; margin-top: 18px; color: var(--muted); font-size: 14px;">The Social Eagle Community — programs, kids' tracks, masterminds and ecosystem partners.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHER MOMENT -->
+<section id="teacher" style="background: var(--bg-2);">
+  <div class="container reveal">
+    <div class="section-head" style="text-align: center;">
+      <div class="section-eyebrow" style="justify-content: center;">A Pause From The Stage</div>
+    </div>
+    <div class="teacher-block">
+      <div class="pre">One thing I noticed:<br>my students cleared all my subjects with <span class="red">100% results.</span></div>
+      <div class="why">Why?</div>
+      <div class="answer">They liked the Teacher.<br>They liked the Subject.</div>
+      <p style="font-size: 14px; color: var(--muted); margin-top: 30px; max-width: 480px; margin-left: auto; margin-right: auto;">A good teacher has the responsibility to change somebody's life. Training is the place that brings transformation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 PILLARS -->
+<!-- EOS REVEAL — Color Framework & Bloom's Taxonomy -->
+<section id="eos-reveal" style="background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The EOS Reveal</div>
+      <h2 class="section-title">From "Remember" to "Create" — <em>by design.</em></h2>
+      <p class="section-lede">EOS isn't a course. It's a learning architecture built on Bloom's Taxonomy — moving members from passive remembering all the way to creative ownership of their business.</p>
+    </div>
+    <div class="reveal" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow);">
+      <img src="../assets/17-eos-color-framework.jpg" alt="EOS Entrepreneur Operating System with Bloom's Taxonomy color framework" style="width: 100%; height: auto; display: block;" />
+    </div>
+    <div class="reveal" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px;">
+      <div style="padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-2);">
+        <div style="font-family: 'Instrument Serif', serif; font-size: 28px; color: var(--red); line-height: 1; margin-bottom: 8px;">01</div>
+        <h4 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">Inner CEO Development</h4>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.55;">Mindset, Performance, Identity. Without you changing, the business cannot change. Stage one is internal.</p>
+      </div>
+      <div style="padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-2);">
+        <div style="font-family: 'Instrument Serif', serif; font-size: 28px; color: var(--red); line-height: 1; margin-bottom: 8px;">02</div>
+        <h4 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">Outer Execution</h4>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.55;">Marketing, Sales, Operations, HR, IT — the eight pillars where execution actually lives. The system runs daily.</p>
+      </div>
+      <div style="padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-2);">
+        <div style="font-family: 'Instrument Serif', serif; font-size: 28px; color: var(--red); line-height: 1; margin-bottom: 8px;">03</div>
+        <h4 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">Strategic Depth</h4>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.55;">Business Model Canvas, 9 Buckets, Continuity, Ecosystem. Where founders become visionaries and value compounds.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 32px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow);">
+      <img src="../assets/19-three-level-framework.jpg" alt="EOS three-level framework: Inner CEO Development, Outer Execution, Strategic Depth" style="width: 100%; height: auto; display: block;" />
+    </div>
+    <div class="reveal" style="margin-top: 32px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow);">
+      <img src="../assets/28-blooms-taxonomy.jpg" alt="Bloom's Taxonomy — the learning architecture behind EOS" style="width: 100%; height: auto; display: block;" />
+    </div>
+    <p class="reveal" style="text-align: center; margin-top: 16px; font-size: 13.5px; color: var(--muted); font-style: italic;">EOS isn't a course — it's a learning architecture engineered to move you up Bloom's Taxonomy: Remember → Understand → Apply → Analyze → Evaluate → Create.</p>
+  </div>
+</section>
+
+<!-- 8 PILLARS -->
+<section id="pillars">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The Entrepreneur Operating System</div>
+      <h2 class="section-title">Eight pillars. <em>One operating system.</em></h2>
+      <p class="section-lede">The actual frameworks Dharani teaches in each pillar — screenshots straight from the seminar. Every framework is real, named and battle-tested.</p>
+    </div>
+
+    <div class="reveal" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow); margin-bottom: 12px;">
+      <img src="../assets/18-eight-pillars-labeled.jpg" alt="The 8 Pillars of Growth — Real CEO Protocol, Marketing, Sales, Strategy, HR & Culture, Public Relations, Operations, IT" style="width: 100%; height: auto; display: block;" />
+    </div>
+    <p class="reveal" style="text-align: center; margin-bottom: 56px; font-size: 13px; color: var(--muted);">Pillars left to right · <strong style="color: var(--ink-2);">1 Real CEO Protocol</strong> · 2 Marketing · 3 Sales · 4 Strategy · 5 HR &amp; Culture · 6 Public Relations · 7 Operations · <strong style="color: var(--ink-2);">8 IT</strong></p>
+
+    <!-- PROGRESSIVE PILLAR WALKTHROUGH -->
+    <div class="pw reveal" id="pillarWalk" style="--auto-ms: 6500ms;">
+      <div class="pw-progress" id="pwProgress">
+        <span class="dot" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
+        <span class="dot" data-i="2"></span>
+        <span class="dot" data-i="3"></span>
+        <span class="dot" data-i="4"></span>
+        <span class="dot" data-i="5"></span>
+        <span class="dot" data-i="6"></span>
+        <span class="dot" data-i="7"></span>
+      </div>
+      <div class="pw-stage">
+        <div class="pw-image" id="pwImage">
+          <img data-i="0" src="../assets/20-pillar1-real-ceo-protocol.jpg" alt="Pillar 1 — Real CEO Protocol" />
+          <img data-i="1" src="../assets/21-pillar2-marketing.jpg" alt="Pillar 2 — Marketing" />
+          <img data-i="2" src="../assets/22-pillar3-sales.jpg" alt="Pillar 3 — Sales" />
+          <img data-i="3" src="../assets/23-pillar4-strategy.jpg" alt="Pillar 4 — Strategy" />
+          <img data-i="4" src="../assets/24-pillar5-hr-culture.jpg" alt="Pillar 5 — HR & Culture" />
+          <img data-i="5" src="../assets/32-pillar6-public-relations.jpg" alt="Pillar 6 — Public Relations" />
+          <img data-i="6" src="../assets/33-pillar7-operations.jpg" alt="Pillar 7 — Operations" />
+          <img data-i="7" src="../assets/26-pillar8-it.jpg" alt="Pillar 8 — IT" />
+        </div>
+        <div class="pw-info" id="pwInfo">
+          <div class="pw-eyebrow">
+            <span class="num" id="pwNum">01</span>
+            <span class="of">Pillar<br/><strong style="color: var(--ink-2);">of 08</strong></span>
+          </div>
+          <h3 class="pw-title" id="pwTitle">Real CEO Protocol</h3>
+          <ul class="pw-frameworks" id="pwFrameworks"></ul>
+        </div>
+      </div>
+      <div class="pw-controls">
+        <button class="pw-btn" id="pwPrev" aria-label="Previous pillar"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6z"/></svg></button>
+        <button class="pw-btn pw-playbtn" id="pwPlay" aria-label="Pause"><svg id="pwPlayIcon" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+        <button class="pw-btn" id="pwNext" aria-label="Next pillar"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6z"/></svg></button>
+        <div class="pw-counter"><strong id="pwCount">1</strong> / 8</div>
+      </div>
+    </div>
+
+    <p class="reveal" style="text-align: center; margin-top: 32px; font-size: 13.5px; color: var(--muted); font-style: italic;">Walk through the eight pillars at the seminar's pace — or use the controls to skip ahead.</p>
+  </div>
+</section>
+
+<!-- PILLAR DETAIL MODAL -->
+<div id="pillarModal" class="pillar-modal" aria-hidden="true">
+  <div class="pillar-modal-backdrop"></div>
+  <div class="pillar-modal-card">
+    <button class="pillar-modal-close" aria-label="Close">×</button>
+    <img id="pillarModalImg" src="" alt="Pillar detail" />
+  </div>
+</div>
+
+<!-- RESULTS -->
+<section id="results" style="background: var(--bg-2);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Member Results · 6 Months In</div>
+      <h2 class="section-title">Receipts. <em>Not testimonials.</em></h2>
+      <p class="section-lede">Numbers shared by members themselves. The first cohort already has 50+ businesses doubled, tripled, or more — most in fewer than six months.</p>
+    </div>
+
+    <div class="reveal" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow); margin-bottom: 56px;">
+      <img src="../assets/34-community-faces.jpg" alt="The EOS community — actual members during a 1-year live zoom session" style="width: 100%; height: auto; display: block;" />
+    </div>
+    <p class="reveal" style="text-align: center; margin-top: -32px; margin-bottom: 56px; font-size: 13.5px; color: var(--muted); font-style: italic;">The cohort, live. Real faces. 70+ hours of weekly connect across the year.</p>
+
+    <div class="results-grid stagger">
+      <div class="result">
+        <div class="name">Uma</div>
+        <div class="domain">Entrepreneur · 6 months</div>
+        <div class="stat-row"><span class="from">₹66 L</span><span class="arrow">→</span><span class="to">2.66<span class="unit">Cr</span></span></div>
+        <span class="growth">4× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Jambulingam</div>
+        <div class="domain">Real Estate · 6 months</div>
+        <div class="stat-row"><span class="from">₹3.2 Cr</span><span class="arrow">→</span><span class="to">4.89<span class="unit">Cr</span></span></div>
+        <span class="growth">1.5× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Vinod</div>
+        <div class="domain">Heritage Brand</div>
+        <div class="stat-row"><span class="from">₹5.5 Cr</span><span class="arrow">→</span><span class="to">7.5<span class="unit">Cr</span></span></div>
+        <span class="growth">1.3× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Laxmi Narezman</div>
+        <div class="domain">Pinsa company</div>
+        <div class="stat-row"><span class="from">₹2 L</span><span class="arrow">→</span><span class="to">9<span class="unit">Cr</span></span></div>
+        <span class="growth">Two lines transformed</span>
+      </div>
+      <div class="result">
+        <div class="name">Gabriel</div>
+        <div class="domain">Service · 6 months</div>
+        <div class="stat-row"><span class="from">₹4.9 L</span><span class="arrow">→</span><span class="to">19.4<span class="unit">L/mo</span></span></div>
+        <span class="growth">4× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Karthik</div>
+        <div class="domain">Digital Marketing Agency · Europe</div>
+        <div class="stat-row"><span class="from">₹3.5 L</span><span class="arrow">→</span><span class="to">6<span class="unit">L/mo</span></span></div>
+        <span class="growth">Strategy reset</span>
+      </div>
+      <div class="result">
+        <div class="name">Sivraj</div>
+        <div class="domain">Digital Agency · Coimbatore</div>
+        <div class="stat-row"><span class="from">₹1.8 L</span><span class="arrow">→</span><span class="to">5<span class="unit">L/mo</span></span></div>
+        <span class="growth">2.7× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Rajati</div>
+        <div class="domain">Community Owner</div>
+        <div class="stat-row"><span class="from">₹7.3 L</span><span class="arrow">→</span><span class="to">10.3<span class="unit">L/mo</span></span></div>
+        <span class="growth">1.4× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Aisa</div>
+        <div class="domain">Bangalore · Marketing</div>
+        <div class="stat-row"><span class="from">₹2 L</span><span class="arrow">→</span><span class="to">5<span class="unit">L/mo</span></span></div>
+        <span class="growth">2.5× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Ajith Kannan</div>
+        <div class="domain">D2C + Consulting</div>
+        <div class="stat-row"><span class="from">₹3 L</span><span class="arrow">→</span><span class="to">6<span class="unit">L/mo</span></span></div>
+        <span class="growth">2× growth</span>
+      </div>
+      <div class="result">
+        <div class="name">Rookmani</div>
+        <div class="domain">Puducherry · Rental Business</div>
+        <div class="stat-row"><span class="from">₹3.5 L</span><span class="arrow">→</span><span class="to">6.5<span class="unit">L/mo</span></span></div>
+        <span class="growth">Avg lifted</span>
+      </div>
+      <div class="result">
+        <div class="name">Muhammad Rias</div>
+        <div class="domain">Employee → Entrepreneur · 6 months</div>
+        <div class="stat-row"><span class="from">Employed</span><span class="arrow">→</span><span class="to">6<span class="unit">L/mo</span></span></div>
+        <span class="growth">New chapter</span>
+      </div>
+    </div>
+
+    <div class="counters reveal">
+      <div class="counter">
+        <div class="num" data-target="78">0</div>
+        <div class="label">Members in Batch 1</div>
+      </div>
+      <div class="counter">
+        <div class="num" data-target="50" data-suffix="+">0</div>
+        <div class="label">Doubled / Tripled / 5×</div>
+      </div>
+      <div class="counter">
+        <div class="num" data-target="70" data-suffix="+ hrs">0</div>
+        <div class="label">Live Sessions / Year</div>
+      </div>
+      <div class="counter">
+        <div class="num" data-target="8">0</div>
+        <div class="label">Pillars of EOS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE OFFER -->
+<section id="offer">
+  <div class="container">
+    <div class="offer reveal">
+      <div class="offer-eyebrow">EOS · Batch 2 · July 2026</div>
+      <h2>The full picture<br>of what's <em>actually</em> on offer.</h2>
+      <p class="offer-lede">A one-year operating system. Three offline events. 70+ live sessions. Custom GPTs. Lifetime community. Only 50 seats — and only for those serious about growth.</p>
+
+      <div class="pricing">
+        <div class="price-card">
+          <div class="tier">Standard List Price</div>
+          <div class="strike">₹19.5 L · stage list</div>
+          <div class="price">₹3.5 L<span class="gst">+ GST</span></div>
+          <span class="save">Pre-special pricing</span>
+          <p class="desc">The standard published rate before the seminar-day discount kicks in. Full year. All eight pillars. All inclusions.</p>
+        </div>
+        <div class="price-card featured">
+          <div class="tier">★ First-Time Founders</div>
+          <div class="strike">₹3.5 L</div>
+          <div class="price">₹2 L<span class="gst">+ GST</span></div>
+          <span class="save">SAVE ₹1.5 L</span>
+          <p class="desc">Launching your business for the first time? This special pricing is only for the seminar window. Locked in with a refundable ₹5,000 token.</p>
+        </div>
+        <div class="price-card">
+          <div class="tier">Scaling Entrepreneurs</div>
+          <div class="strike">₹3.5 L</div>
+          <div class="price">₹3 L<span class="gst">+ GST</span></div>
+          <span class="save">SAVE ₹50,000</span>
+          <p class="desc">For business owners actively scaling — already running, looking for systems, leverage and the next step-change.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; color: rgba(255,255,255,0.7); font-size: 14.5px; line-height: 1.7; max-width: 720px; position: relative; z-index: 2;">
+        <strong style="color: white;">How the ₹5,000 token works:</strong> You pay a refundable ₹5,000 to schedule a 1:1 with Dharani. He decides if you're a fit — not the other way around. If he doesn't enrol you, the ₹5,000 is refunded. He wants to work with people. Action takers. Game changers.
+      </div>
+
+      <div style="margin-top: 56px; position: relative; z-index: 2;">
+        <p style="color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px;">Bonus #1 · Doable Templates Pack</p>
+        <div style="border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="../assets/27-doable-templates.jpg" alt="Doable Templates for each of the 8 EOS pillars" style="width: 100%; height: auto; display: block;" />
+        </div>
+        <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin-top: 12px;">Plug-and-play templates for every pillar — Real CEO Protocol, Marketing, Sales, Strategy, HR &amp; Culture, Public Relations, Operations, IT.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The 12-Month Roadmap</div>
+      <h2 class="section-title">Five touch-points. <em>One year of execution.</em></h2>
+      <p class="section-lede">Three days of kickstart. Four offline alignment meets. 70+ hours live. Lifetime community access. Custom GPTs and templates included.</p>
+    </div>
+    <div class="reveal" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow); margin-bottom: 8px;">
+      <img src="../assets/25-kickstarter.jpg" alt="3 Days Offline Kickstarter Session — 3, 4, 5 July 2026" style="width: 100%; height: auto; display: block;" />
+    </div>
+
+    <div class="schedule stagger">
+      <div class="schedule-card kick">
+        <div class="month">Jul 3–5, 2026</div>
+        <div class="label">3-Day Kickstarter</div>
+        <div class="meta">Offline kickstarter session. The cohort meets in person to download the operating system.</div>
+      </div>
+      <div class="schedule-card">
+        <div class="month">Sep 19–20, 2026</div>
+        <div class="label">Alignment Meet I</div>
+        <div class="meta">2-day offline reset. Marketing + Sales deep-dive with guest experts.</div>
+      </div>
+      <div class="schedule-card">
+        <div class="month">Dec 19–20, 2026</div>
+        <div class="label">Alignment Meet II</div>
+        <div class="meta">2-day offline reset. Operations + Finance + HR. Mid-year correction.</div>
+      </div>
+      <div class="schedule-card">
+        <div class="month">Feb 19–20, 2027</div>
+        <div class="label">Alignment Meet III</div>
+        <div class="meta">2-day offline reset. AI, Digital + Thinking systems integration.</div>
+      </div>
+      <div class="schedule-card">
+        <div class="month">Jun 2027</div>
+        <div class="label">Graduation + Gala</div>
+        <div class="meta">Eagle Award ceremony. The first batch's hotel celebration. New legacy starts here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPARKS / TAKEAWAYS -->
+<section id="sparks" style="background: var(--bg-2);">
+  <div class="container reveal">
+    <div class="section-head">
+      <div class="section-eyebrow">Sparks From The Room</div>
+      <h2 class="section-title">What attendees typed <em>in real time.</em></h2>
+      <p class="section-lede">Mid-session, Dharani asked: "What's your biggest learning?" The room replied. These are the sparks that surfaced.</p>
+    </div>
+
+    <div class="sparks-wrap">
+      <div class="spark-pill">Adopt AI first</div>
+      <div class="spark-pill">Learning &amp; doing in parallel</div>
+      <div class="spark-pill">Don't miss AI</div>
+      <div class="spark-pill">Early adoption matters</div>
+      <div class="spark-pill">Importance of AI</div>
+      <div class="spark-pill">Utilize the energy</div>
+      <div class="spark-pill">Take the opportunity when it comes</div>
+      <div class="spark-pill">Don't wait</div>
+      <div class="spark-pill">Open to receive energy</div>
+      <div class="spark-pill">AI usage</div>
+      <div class="spark-pill">Problem-informed opportunity</div>
+      <div class="spark-pill">Trend prediction</div>
+      <div class="spark-pill">Learning fast</div>
+      <div class="spark-pill">N customers buying M times</div>
+      <div class="spark-pill">Marketing is investment, not waste</div>
+      <div class="spark-pill">Speed of implementation</div>
+      <div class="spark-pill">Break ceiling thinking</div>
+      <div class="spark-pill">Respect the business</div>
+      <div class="spark-pill">Build the system, then escape it</div>
+      <div class="spark-pill">Money mindset is real life</div>
+    </div>
+
+    <div style="margin-top: 64px; padding: 40px; border-radius: var(--radius); background: linear-gradient(135deg, #0a0a0a, #1a1a1a); color: white; text-align: center;">
+      <p style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.4; max-width: 760px; margin: 0 auto;">"Real freedom fighters are the entrepreneurs. Irrespective of GST, IT, war, or problem — you're still taking care of those 40, 100, 200 families. <span style="color: var(--red); font-style: normal; font-weight: 600;">That's the new-age fight.</span>"</p>
+      <cite style="display: block; margin-top: 20px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); font-style: normal;">— Dharaneetharan G D · 10 May 2026</cite>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="logo">EOS<span class="red">.</span> Recap</div>
+    <p>An illustrated walkthrough of the live seminar by Dharaneetharan G D, Social Eagle.</p>
+    <p style="font-size: 12px; opacity: 0.7;">Recap built by Shaid · 10 May 2026 · Chennai</p>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/shaidhms" target="_blank" rel="noopener">LinkedIn · @shaidhms</a>
+      <a href="https://www.instagram.com/shaidhms" target="_blank" rel="noopener">Instagram · @shaidhms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal, .stagger, .tl-item');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  reveals.forEach(r => io.observe(r));
+
+  // Counter animation
+  const counters = document.querySelectorAll('.counter .num');
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const v = Math.round(target * ease(t));
+        el.textContent = v + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => cio.observe(c));
+
+  // Nav hide on scroll past hero
+  const nav = document.getElementById('nav');
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const heroH = window.innerHeight * 0.4;
+    if (y > heroH && y > lastY) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    lastY = y;
+  }, { passive: true });
+
+  // Smooth scroll for nav anchors
+  document.querySelectorAll('.nav a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (!href.startsWith('#')) return;
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // PILLAR WALKTHROUGH (progressive auto-play with controls)
+  (function () {
+    const pillars = [
+      { num: '01', title: 'Real CEO Protocol', color: '#dc2626', items: ['CEO Mindset', 'CEO Archetype', 'Activity Audit', 'Time Management', 'Per-Hour Value', '168 Hours Framework', 'Money Mindset', 'Strategy Pyramid', 'Continuous Learning Framework', 'CEO Manifesto'] },
+      { num: '02', title: 'Marketing', color: '#ea580c', items: ['RECCE Research Framework', 'Competitor Research', 'Ideal Customer Profile (ICP)', 'Platform Mapping', 'Marketing Message Structure', 'FBG Framework', 'High-Value Content Offers', 'Appointment Funnels', 'Lead Generation', 'LinkedIn Content Engine', 'YouTube Channel Strategy', 'Long-form Authority Building'] },
+      { num: '03', title: 'Sales', color: '#ca8a04', items: ['Sales Deck Structure', 'Slide Flow', 'Value Delivery Sequencing', 'RASNA Framework', 'Sales Conversation Structure', 'Prospect Pacing', 'Pipeline Tracking', 'Follow-up Cadence', 'Lead Recovery Diagnostics', 'Objection Handling', 'Pricing Strategy', 'Value-Based Pricing'] },
+      { num: '04', title: 'Strategy', color: '#16a34a', items: ['Business Model Canvas (BMC)', 'Mapping Current Business', '9 Buckets Framework', 'Business Health Diagnostic', 'Value Proposition Framework', 'Customer-Language Gaps', 'Competitor Differentiation', 'Recurring Revenue Design', 'Continuity Models', 'Strategic Networking', 'Partnership Playbook', 'Deal-Making Frameworks'] },
+      { num: '05', title: 'HR & Culture', color: '#0891b2', items: ['Core Values Definition', '5 Pillars of Culture', 'Culture Audit', 'Hiring Process Implementation', 'HR Onboarding Rituals', 'Hiring Scorecards', 'Team Skill-Gap Analysis', 'Training Calendar', 'Team-Building Rituals', 'OKR Framework', 'Quarterly Review Cadence', 'Team Alignment'] },
+      { num: '06', title: 'Public Relations', color: '#7c3aed', items: ['Personal Branding', 'Getting Free PR', 'Media Kit Creation', 'Ecosystem Creation'] },
+      { num: '07', title: 'Operations', color: '#a16207', items: ['Team Management Cadence', 'SOP Creation', 'Delegation Framework', 'Meeting Templates', 'Leadership Meetings', 'All-Hands Meetings', '1:1 Meetings', 'Schedule Optimization'] },
+      { num: '08', title: 'IT', color: '#1e40af', items: ['Tool Stack Audit', 'CRM Tools', 'Communication Tools', 'Automation Tools', 'Finance & Productivity Tools', 'AI Tool Categories', 'AI for Writing, Design, Automation & Analysis', 'Workflow AI Integration', 'Prompting Frameworks', 'Tool-to-Tool Automation', 'Custom AI Playbook Design', 'AI-Augmented Workflow'] }
+    ];
+
+    const pwRoot = document.getElementById('pillarWalk');
+    if (!pwRoot) return;
+    const pwProgress = document.getElementById('pwProgress');
+    const pwImages = pwRoot.querySelectorAll('.pw-image img');
+    const pwNum = document.getElementById('pwNum');
+    const pwTitle = document.getElementById('pwTitle');
+    const pwFrameworks = document.getElementById('pwFrameworks');
+    const pwCount = document.getElementById('pwCount');
+    const pwPrev = document.getElementById('pwPrev');
+    const pwNext = document.getElementById('pwNext');
+    const pwPlay = document.getElementById('pwPlay');
+    const pwPlayIcon = document.getElementById('pwPlayIcon');
+    const dots = pwProgress.querySelectorAll('.dot');
+    const ICON_PAUSE = '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+    const ICON_PLAY = '<path d="M8 5v14l11-7z"/>';
+    const AUTO_MS = 6500;
+
+    let i = 0;
+    let playing = false;
+    let timer = null;
+
+    function render(idx) {
+      const p = pillars[idx];
+      pwImages.forEach((img, k) => img.classList.toggle('show', k === idx));
+      dots.forEach((d, k) => {
+        d.classList.toggle('active', k === idx);
+        d.classList.toggle('done', k < idx);
+      });
+      // restart progress animation by force-reflow
+      const activeDot = pwProgress.querySelector('.dot.active');
+      if (activeDot) {
+        activeDot.style.setProperty('--auto-ms', AUTO_MS + 'ms');
+      }
+      pwNum.textContent = p.num;
+      pwNum.style.color = p.color;
+      pwTitle.textContent = p.title;
+      pwFrameworks.style.setProperty('--accent', p.color);
+      pwFrameworks.classList.remove('in');
+      pwFrameworks.innerHTML = p.items.map(t => `<li>${t}</li>`).join('');
+      // re-trigger stagger
+      requestAnimationFrame(() => requestAnimationFrame(() => pwFrameworks.classList.add('in')));
+      pwCount.textContent = String(idx + 1);
+    }
+
+    function next() { i = (i + 1) % pillars.length; render(i); }
+    function prev() { i = (i - 1 + pillars.length) % pillars.length; render(i); }
+
+    function play() {
+      if (playing) return;
+      playing = true;
+      pwPlayIcon.innerHTML = ICON_PAUSE;
+      pwProgress.classList.remove('paused');
+      // clear any existing timer
+      if (timer) clearInterval(timer);
+      timer = setInterval(next, AUTO_MS);
+    }
+    function pause() {
+      playing = false;
+      pwPlayIcon.innerHTML = ICON_PLAY;
+      pwProgress.classList.add('paused');
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    pwNext.addEventListener('click', () => { pause(); next(); });
+    pwPrev.addEventListener('click', () => { pause(); prev(); });
+    pwPlay.addEventListener('click', () => playing ? pause() : play());
+    dots.forEach((d, k) => d.addEventListener('click', () => { pause(); i = k; render(i); }));
+
+    // Auto-play once the section enters viewport
+    const pwIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          render(i);
+          play();
+          pwIO.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    pwIO.observe(pwRoot);
+
+    // Also render at start so it doesn't look empty before viewport hits
+    render(0);
+  })();
+
+  // Pillar modal
+  const pillarModal = document.getElementById('pillarModal');
+  const pillarModalImg = document.getElementById('pillarModalImg');
+  const pillarModalClose = document.querySelector('.pillar-modal-close');
+  const pillarModalBackdrop = document.querySelector('.pillar-modal-backdrop');
+  function openPillarModal(src) {
+    pillarModalImg.src = src;
+    pillarModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePillarModal() {
+    pillarModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.pillar[data-detail]').forEach(p => {
+    p.addEventListener('click', () => openPillarModal(p.dataset.detail));
+  });
+  pillarModalClose.addEventListener('click', closePillarModal);
+  pillarModalBackdrop.addEventListener('click', closePillarModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePillarModal();
+  });
+
+  // Subtle parallax on hero
+  const hero = document.querySelector('.hero h1');
+  if (hero) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      hero.style.transform = `translateY(${y * 0.2}px)`;
+      hero.style.opacity = Math.max(0, 1 - y / 600);
+    }, { passive: true });
+  }
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6cc6a9acdccf4542acb7ed288c49c803"}'></script>
+
+</body>
+</html>

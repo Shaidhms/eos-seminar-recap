@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOS Seminar Recap — Get the Notes</title>
+<meta name="description" content="Quick check-in to access the illustrated recap of the EOS (Entrepreneur Operating System) seminar by Dharaneetharan G D, Social Eagle — May 10, 2026. Curated by Muhibbuddin Shaid Hakkeem.">
+<meta property="og:title" content="EOS Seminar Recap · Social Eagle · 10 May 2026">
+<meta property="og:description" content="Illustrated recap of the live EOS seminar — journey, 14 reasons, 8 pillars, member results and the offer.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/35-eos-emblem.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicon-256.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0a">
+
+<style>
+:root {
+  --bg: #faf9f6;
+  --bg-soft: #fff;
+  --bg-card: #ffffff;
+  --text: #0a0a0a;
+  --text-muted: #5a5a5a;
+  --text-dim: #8a8a8a;
+  --line: rgba(10,10,10,0.08);
+  --accent: #dc2626;
+  --accent-2: #b91c1c;
+  --gold: #c9a227;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* Subtle ray-burst background like the seminar slides */
+.rays {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background:
+    conic-gradient(from 90deg at 50% 100%,
+      transparent 0deg,
+      rgba(0,0,0,0.04) 8deg, transparent 16deg,
+      rgba(0,0,0,0.05) 26deg, transparent 36deg,
+      rgba(0,0,0,0.03) 46deg, transparent 56deg,
+      rgba(0,0,0,0.05) 70deg, transparent 84deg,
+      rgba(0,0,0,0.04) 100deg, transparent 116deg,
+      rgba(0,0,0,0.05) 130deg, transparent 146deg,
+      rgba(0,0,0,0.04) 160deg, transparent 180deg);
+  mask-image: radial-gradient(ellipse at 50% 110%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 110%, black 30%, transparent 75%);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.hero {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 24px;
+  position: relative;
+  z-index: 1;
+}
+.hero-inner {
+  max-width: 680px; width: 100%;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative; z-index: 2;
+}
+
+.brand {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+}
+.brand-logo {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: white;
+  border: 2px solid rgba(220,38,38,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+  font-weight: 400;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+.brand-text { line-height: 1.25; text-align: left; }
+.brand-name {
+  font-weight: 800; font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.brand-tag {
+  font-size: 11.5px; color: var(--text-muted); letter-spacing: 0.04em;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  background: rgba(0,0,0,0.04); color: var(--text);
+  border: 1px solid var(--line); border-radius: 100px;
+  margin-bottom: 22px;
+}
+.hero-tag .dot {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+.eos-emblem {
+  width: clamp(220px, 42vw, 380px);
+  margin: 0 auto 24px;
+  display: block;
+  filter: drop-shadow(0 12px 30px rgba(0,0,0,0.08));
+  animation: emblem-in 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  mix-blend-mode: multiply;
+}
+@keyframes emblem-in {
+  from { opacity: 0; transform: translateY(-12px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+h1 {
+  font-size: clamp(28px, 4.4vw, 44px); font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.03em; margin-bottom: 14px;
+  color: var(--text);
+}
+h1 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: 16px; color: var(--text-muted); max-width: 540px; line-height: 1.55;
+  margin-bottom: 32px;
+}
+
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; font-size: 15px; font-weight: 700;
+  letter-spacing: 0.005em;
+  background: var(--text);
+  color: #fff; border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(10,10,10,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  margin-bottom: 12px;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent);
+  box-shadow: 0 14px 36px rgba(220,38,38,0.32);
+}
+.cta-btn .arrow { transition: transform 0.15s ease; }
+.cta-btn:hover .arrow { transform: translateX(4px); }
+
+.cta-meta {
+  font-size: 12px; color: var(--text-dim); margin-bottom: 36px;
+}
+
+/* Highlight strip */
+.highlights {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  margin-bottom: 36px;
+  max-width: 560px;
+}
+.hl-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.hl-pill strong { color: var(--text); font-weight: 700; }
+
+/* Mentor card */
+.curated-by {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; max-width: 460px; width: 100%; margin: 0 auto 14px;
+}
+.curated-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.18) 50%, transparent 100%);
+}
+.curated-text {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  color: var(--text-muted); flex-shrink: 0; font-style: italic;
+}
+.mentor-card {
+  display: flex; align-items: center; gap: 14px;
+  max-width: 440px; width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+.mentor-photo {
+  width: 48px; height: 48px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 12px rgba(220,38,38,0.18);
+  flex-shrink: 0;
+}
+.mentor-info { text-align: left; }
+.mentor-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 2px;
+}
+.mentor-name {
+  font-size: 14px; font-weight: 700; color: var(--text);
+}
+.mentor-bio { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+
+.site-footer {
+  text-align: center;
+  padding: 16px 20px;
+  font-size: 11px; color: var(--text-dim);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--line);
+  background: var(--bg-soft);
+  position: relative; z-index: 1;
+}
+.site-footer p { line-height: 1.5; }
+
+@media (max-width: 600px) {
+  .hero { padding: 24px 18px; }
+  .brand-logo { width: 36px; height: 36px; font-size: 18px; }
+  .brand-name { font-size: 16px; }
+  .lead { font-size: 14px; margin-bottom: 26px; }
+  .cta-btn { padding: 12px 22px; font-size: 14px; }
+  .cta-meta { margin-bottom: 28px; }
+  .mentor-card { padding: 12px 14px; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="rays"></div>
+
+<main class="hero">
+  <div class="hero-inner">
+
+    <div class="brand">
+      <div class="brand-logo">SE</div>
+      <div class="brand-text">
+        <div class="brand-name">Social Eagle</div>
+        <div class="brand-tag">Together we rise</div>
+      </div>
+    </div>
+
+    <div class="hero-tag"><span class="dot"></span> Seminar Recap · Free</div>
+
+    <img src="assets/35-eos-emblem.png" alt="EOS — Entrepreneur Operating System" class="eos-emblem">
+
+    <h1>An <em>illustrated recap</em><br>of the live seminar.</h1>
+
+    <p class="lead">Notes, frameworks, the 8 pillars, member results, the offer — every slide from the 50-minute live workshop by Dharaneetharan G&nbsp;D on 10 May 2026.</p>
+
+    <a id="get-access" href="https://tally.so/r/EkvXXB?Class=EOS%20Seminar" class="cta-btn">
+      Get Access
+      <span class="arrow">&rarr;</span>
+    </a>
+    <div class="cta-meta">Takes 10 seconds &middot; For Social Eagle community members</div>
+
+    <div class="highlights">
+      <span class="hl-pill"><strong>14</strong> reasons businesses fail</span>
+      <span class="hl-pill"><strong>8</strong> pillars of EOS</span>
+      <span class="hl-pill"><strong>50+</strong> doubled revenue</span>
+      <span class="hl-pill">May 10, 2026</span>
+    </div>
+
+    <div class="curated-by">
+      <span class="curated-line"></span>
+      <span class="curated-text">Recap curated &amp; built by</span>
+      <span class="curated-line"></span>
+    </div>
+
+    <div class="mentor-card">
+      <img src="assets/00-dharani-portrait.jpg" alt="Muhibbuddin Shaid Hakkeem" class="mentor-photo" onerror="this.style.display='none'">
+      <div class="mentor-info">
+        <div class="mentor-label">Curator</div>
+        <div class="mentor-name">Muhibbuddin Shaid Hakkeem</div>
+        <div class="mentor-bio">EOS member &middot; Social Eagle community</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>EOS Seminar Recap &middot; Social Eagle &middot; 10 May 2026</p>
+</footer>
+
+<script>
+// Generate a unique session id on each page load and bake it into the Tally URL.
+(function() {
+  var sid = (window.crypto && crypto.randomUUID)
+    ? crypto.randomUUID()
+    : (Math.random().toString(36).slice(2, 12) + Date.now().toString(36));
+  var btn = document.getElementById('get-access');
+  if (btn) {
+    var u = new URL(btn.href);
+    u.searchParams.set('sid', sid);
+    btn.href = u.toString();
+  }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6cc6a9acdccf4542acb7ed288c49c803"}'></script>
+
+</body>
+</html>
