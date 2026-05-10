@@ -1040,6 +1040,28 @@
     color: var(--ink); letter-spacing: -0.01em; margin-bottom: 6px;
   }
   .mentor-bio { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .mentor-roles {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 18px;
+  }
+  .mentor-roles span {
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px;
+    background: rgba(0,0,0,0.04);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-2);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .footer-meta-top {
+    max-width: 700px; margin: 0 auto 32px;
+    color: var(--muted);
+  }
+  .footer-meta-top p { margin: 0; }
+  .footer-meta-top p strong { color: var(--ink); font-weight: 800; letter-spacing: -0.01em; }
+  .footer-meta-top p:first-child { font-size: 14px; margin-bottom: 6px; }
+  .footer-meta-top p:last-child { font-size: 13px; }
   .mentor-social {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;
   }
@@ -2068,6 +2090,10 @@
 
 <!-- FOOTER -->
 <footer class="site-footer">
+  <div class="footer-meta footer-meta-top">
+    <p><strong>EOS Seminar Recap · 10 May 2026 · Chennai</strong></p>
+    <p>An illustrated walkthrough of the live seminar by Dharaneetharan G D, Social Eagle.</p>
+  </div>
   <div class="curated-by">
     <span class="curated-line"></span>
     <span class="curated-text">Recap built &amp; curated carefully by</span>
@@ -2080,7 +2106,12 @@
     <div class="mentor-info">
       <div class="mentor-label">Curator</div>
       <div class="mentor-name">MUHIBBUDDIN SHAID HAKKEEM</div>
-      <div class="mentor-bio">Social Eagle community · EOS Batch 1 member</div>
+      <div class="mentor-roles">
+        <span>Social Eagle AI</span>
+        <span>21DC</span>
+        <span>AS</span>
+        <span>SE Community</span>
+      </div>
       <div class="mentor-social">
         <a href="https://www.shaid360.com" target="_blank" rel="noopener" class="social-link">
           <span class="social-icon">
@@ -2130,10 +2161,6 @@
         </a>
       </div>
     </div>
-  </div>
-  <div class="footer-meta">
-    <p>EOS Seminar Recap · 10 May 2026 · Chennai</p>
-    <p>An illustrated walkthrough of the live seminar by Dharaneetharan G D, Social Eagle.</p>
   </div>
 </footer>
 
