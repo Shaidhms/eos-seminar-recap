@@ -65,55 +65,54 @@ a { color: inherit; text-decoration: none; }
   z-index: 0;
 }
 
+html, body { height: 100%; }
+body { overflow: hidden; }
+
 .hero {
   flex: 1;
   display: flex; align-items: center; justify-content: center;
-  padding: 32px 24px;
+  padding: 16px 24px;
   position: relative;
   z-index: 1;
+  min-height: 0;
 }
 .hero-inner {
-  max-width: 680px; width: 100%;
+  max-width: 640px; width: 100%;
   display: flex; flex-direction: column; align-items: center; text-align: center;
   position: relative; z-index: 2;
 }
 
 .brand {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
 }
 .brand-logo {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: white;
-  border: 2px solid rgba(220,38,38,0.18);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-  font-size: 22px;
-  color: var(--accent);
-  font-weight: 400;
+  width: 40px; height: 40px;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  display: flex; align-items: center; justify-content: center;
 }
-.brand-text { line-height: 1.25; text-align: left; }
+.brand-logo img {
+  width: 100%; height: 100%; object-fit: contain;
+}
+.brand-text { line-height: 1.2; text-align: left; }
 .brand-name {
-  font-weight: 800; font-size: 18px;
+  font-weight: 800; font-size: 15px;
   letter-spacing: -0.01em;
   color: var(--text);
 }
 .brand-tag {
-  font-size: 11.5px; color: var(--text-muted); letter-spacing: 0.04em;
+  font-size: 10.5px; color: var(--text-muted); letter-spacing: 0.04em;
 }
 
 .hero-tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px; font-size: 11px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; font-size: 10px; font-weight: 600;
   letter-spacing: 0.16em; text-transform: uppercase;
   background: rgba(0,0,0,0.04); color: var(--text);
   border: 1px solid var(--line); border-radius: 100px;
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 .hero-tag .dot {
-  width: 6px; height: 6px; background: var(--accent);
+  width: 5px; height: 5px; background: var(--accent);
   border-radius: 50%;
   animation: pulse 1.8s ease-in-out infinite;
 }
@@ -123,10 +122,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 .eos-emblem {
-  width: clamp(220px, 42vw, 380px);
-  margin: 0 auto 24px;
+  width: clamp(160px, 26vh, 280px);
+  margin: 0 auto 12px;
   display: block;
-  filter: drop-shadow(0 12px 30px rgba(0,0,0,0.08));
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,0.08));
   animation: emblem-in 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   mix-blend-mode: multiply;
 }
@@ -136,8 +135,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 h1 {
-  font-size: clamp(28px, 4.4vw, 44px); font-weight: 900; line-height: 1.05;
-  letter-spacing: -0.03em; margin-bottom: 14px;
+  font-size: clamp(22px, 3.4vw, 34px); font-weight: 900; line-height: 1.1;
+  letter-spacing: -0.03em; margin-bottom: 8px;
   color: var(--text);
 }
 h1 em {
@@ -148,19 +147,19 @@ h1 em {
 }
 
 .lead {
-  font-size: 16px; color: var(--text-muted); max-width: 540px; line-height: 1.55;
-  margin-bottom: 32px;
+  font-size: 14px; color: var(--text-muted); max-width: 520px; line-height: 1.5;
+  margin-bottom: 16px;
 }
 
 .cta-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 28px; font-size: 15px; font-weight: 700;
+  padding: 12px 24px; font-size: 14px; font-weight: 700;
   letter-spacing: 0.005em;
   background: var(--text);
   color: #fff; border-radius: 12px;
-  box-shadow: 0 10px 28px rgba(10,10,10,0.18);
+  box-shadow: 0 8px 22px rgba(10,10,10,0.18);
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 .cta-btn:hover {
   transform: translateY(-2px);
@@ -171,22 +170,22 @@ h1 em {
 .cta-btn:hover .arrow { transform: translateX(4px); }
 
 .cta-meta {
-  font-size: 12px; color: var(--text-dim); margin-bottom: 36px;
+  font-size: 11px; color: var(--text-dim); margin-bottom: 18px;
 }
 
 /* Highlight strip */
 .highlights {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
-  margin-bottom: 36px;
-  max-width: 560px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+  margin-bottom: 18px;
+  max-width: 540px;
 }
 .hl-pill {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 12px;
+  padding: 4px 10px;
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -195,60 +194,81 @@ h1 em {
 /* Mentor card */
 .curated-by {
   display: flex; align-items: center; justify-content: center;
-  gap: 14px; max-width: 460px; width: 100%; margin: 0 auto 14px;
+  gap: 10px; max-width: 420px; width: 100%; margin: 0 auto 8px;
 }
 .curated-line {
   flex: 1; height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.18) 50%, transparent 100%);
 }
 .curated-text {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.04em;
   color: var(--text-muted); flex-shrink: 0; font-style: italic;
 }
 .mentor-card {
-  display: flex; align-items: center; gap: 14px;
-  max-width: 440px; width: 100%;
-  padding: 14px 18px;
-  background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px;
+  display: flex; align-items: center; gap: 12px;
+  max-width: 480px; width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px;
   position: relative;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
 }
 .mentor-photo {
-  width: 48px; height: 48px; border-radius: 50%;
+  width: 42px; height: 42px; border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
   box-shadow: 0 4px 12px rgba(220,38,38,0.18);
   flex-shrink: 0;
 }
-.mentor-info { text-align: left; }
+.mentor-info { text-align: left; min-width: 0; flex: 1; }
 .mentor-label {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 2px;
+  font-size: 8.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1px;
 }
 .mentor-name {
-  font-size: 14px; font-weight: 700; color: var(--text);
+  font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.2;
 }
-.mentor-bio { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+.mentor-roles {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-top: 4px;
+}
+.mentor-roles span {
+  font-size: 9.5px; font-weight: 600;
+  padding: 2px 7px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
 
 .site-footer {
   text-align: center;
-  padding: 16px 20px;
-  font-size: 11px; color: var(--text-dim);
+  padding: 8px 20px;
+  font-size: 10px; color: var(--text-dim);
   letter-spacing: 0.04em;
   border-top: 1px solid var(--line);
   background: var(--bg-soft);
   position: relative; z-index: 1;
+  flex-shrink: 0;
 }
-.site-footer p { line-height: 1.5; }
+.site-footer p { line-height: 1.4; }
 
 @media (max-width: 600px) {
-  .hero { padding: 24px 18px; }
-  .brand-logo { width: 36px; height: 36px; font-size: 18px; }
-  .brand-name { font-size: 16px; }
-  .lead { font-size: 14px; margin-bottom: 26px; }
-  .cta-btn { padding: 12px 22px; font-size: 14px; }
-  .cta-meta { margin-bottom: 28px; }
-  .mentor-card { padding: 12px 14px; gap: 12px; }
+  body { overflow: auto; }
+  .hero { padding: 16px 16px; }
+  .brand-logo { width: 32px; height: 32px; font-size: 16px; }
+  .brand-name { font-size: 14px; }
+  .lead { font-size: 13px; margin-bottom: 14px; }
+  .cta-btn { padding: 10px 20px; font-size: 13px; }
+  .mentor-card { padding: 10px 12px; gap: 10px; }
+  .mentor-roles span { font-size: 9px; }
+}
+@media (max-height: 720px) {
+  .eos-emblem { width: clamp(140px, 22vh, 220px); margin-bottom: 8px; }
+  .lead { margin-bottom: 12px; }
+  .highlights { margin-bottom: 12px; }
+  .cta-meta { margin-bottom: 14px; }
 }
 </style>
 </head>
@@ -260,7 +280,7 @@ h1 em {
   <div class="hero-inner">
 
     <div class="brand">
-      <div class="brand-logo">SE</div>
+      <div class="brand-logo"><img src="assets/se-logo.png" alt="Social Eagle logo"></div>
       <div class="brand-text">
         <div class="brand-name">Social Eagle</div>
         <div class="brand-tag">Together we rise</div>
@@ -299,7 +319,12 @@ h1 em {
       <div class="mentor-info">
         <div class="mentor-label">Curator</div>
         <div class="mentor-name">Muhibbuddin Shaid Hakkeem</div>
-        <div class="mentor-bio">EOS member &middot; Social Eagle community</div>
+        <div class="mentor-roles">
+          <span>Social Eagle AI</span>
+          <span>21DC</span>
+          <span>AS</span>
+          <span>SE Community</span>
+        </div>
       </div>
     </div>
 
