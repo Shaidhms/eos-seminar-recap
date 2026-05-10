@@ -986,32 +986,31 @@
     transform: translateY(-2px);
   }
 
-  /* FAILURE ASIDE (callout + video sidebar) */
-  .failure-aside {
+  /* FAILURE VIDEO HERO (sits between lede and cards) */
+  .failure-video-hero {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    gap: 28px;
-    margin-top: 40px;
-    align-items: start;
-  }
-  .failure-aside-left {
-    min-width: 0;
-  }
-  .failure-aside-right {
-    min-width: 0;
-    padding: 22px;
-    background: var(--bg-2);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 56px;
+    padding: 28px;
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg) 100%);
     border: 1px solid var(--line);
-    border-radius: 18px;
+    border-radius: 22px;
     box-shadow: var(--shadow);
   }
-  .video-embed-portrait {
-    aspect-ratio: 9 / 16;
-    max-height: 520px;
+  .failure-video-side h3 {
+    font-size: clamp(22px, 2.6vw, 30px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .failure-video-frame {
+    min-width: 0;
   }
   @media (max-width: 900px) {
-    .failure-aside { grid-template-columns: 1fr; }
-    .video-embed-portrait { aspect-ratio: 16/9; max-height: none; }
+    .failure-video-hero { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
   }
 
   /* VIDEO EMBED */
@@ -1684,6 +1683,21 @@
       <p class="section-lede">Not a generic list — these are the exact 14 numbered failure patterns Dharani walked through on stage, slide by slide. Read them honestly. The first reason most owners fail isn't strategy — it's motivation.</p>
     </div>
 
+    <!-- VIDEO HERO -->
+    <div class="reveal failure-video-hero">
+      <div class="failure-video-side">
+        <div class="video-eyebrow">Watch · From the seminar</div>
+        <h3>The 14 reasons, in Dharani's <em style="font-family: 'Instrument Serif', serif; font-style: italic; color: var(--red); font-weight: 400;">own voice</em>.</h3>
+        <p style="font-size: 14.5px; color: var(--muted); line-height: 1.6; margin-bottom: 12px;">Press play to hear Dharani walk through every failure pattern in his own words — or scroll on to read each card below.</p>
+        <p style="font-size: 12.5px; color: var(--muted); font-style: italic;">Live recording · 10 May 2026 · ~5 min</p>
+      </div>
+      <div class="failure-video-frame">
+        <div class="video-embed">
+          <iframe src="https://drive.google.com/file/d/1Qkat_4FHfUIlgpbt5XhicTWkaspBejFj/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
     <div class="reasons stagger">
       <div class="reason">
         <span class="num">01</span>
@@ -1757,25 +1771,12 @@
       </div>
     </div>
 
-    <div class="reveal failure-aside">
-      <div class="failure-aside-left">
-        <p style="padding: 24px 28px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; font-size: 14.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 24px;"><strong style="color: var(--red);">Two more from the offer-side of the seminar →</strong> <em>Lack of Product–Market Fit</em> (red ocean trap, no blue ocean angle) and <em>Ceiling Thinking</em> (the abundance gap — "if someone with no degree can become Chief Minister, what's stopping you?"). EOS is built specifically to solve all of these — in order.</p>
+    <p class="reveal" style="margin-top: 32px; padding: 24px 28px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; font-size: 14.5px; color: var(--ink-2); line-height: 1.6;"><strong style="color: var(--red);">Two more from the offer-side of the seminar →</strong> <em>Lack of Product–Market Fit</em> (red ocean trap, no blue ocean angle) and <em>Ceiling Thinking</em> (the abundance gap — "if someone with no degree can become Chief Minister, what's stopping you?"). EOS is built specifically to solve all of these — in order.</p>
 
-        <div style="border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow);">
-          <img src="../assets/29-eagle-methodology.jpg" alt="The Eagle Methodology of Teaching — Online + Offline + Cohort + Community + Course + Accountability + Framework + Tools + Zone = Wins" style="width: 100%; height: auto; display: block;" />
-        </div>
-        <p style="text-align: center; margin-top: 10px; font-size: 13px; color: var(--muted); font-style: italic;">The antidote — the Eagle Methodology of Teaching.</p>
-      </div>
-
-      <aside class="failure-aside-right">
-        <div class="video-eyebrow">Watch · From the seminar</div>
-        <h4 style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 14px;">In Dharani's <em style="font-family: 'Instrument Serif', serif; font-style: italic; color: var(--red); font-weight: 400;">own voice</em>.</h4>
-        <div class="video-embed video-embed-portrait">
-          <iframe src="https://drive.google.com/file/d/1Qkat_4FHfUIlgpbt5XhicTWkaspBejFj/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <p class="video-caption" style="margin-top: 10px; font-size: 12px;">Live · 10 May 2026 · Walking through the failure patterns.</p>
-      </aside>
+    <div class="reveal" style="margin-top: 56px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: white; box-shadow: var(--shadow);">
+      <img src="../assets/29-eagle-methodology.jpg" alt="The Eagle Methodology of Teaching — Online + Offline + Cohort + Community + Course + Accountability + Framework + Tools + Zone = Wins" style="width: 100%; height: auto; display: block;" />
     </div>
+    <p class="reveal" style="text-align: center; margin-top: 12px; font-size: 13.5px; color: var(--muted); font-style: italic;">The antidote — the Eagle Methodology of Teaching. Nine ingredients, one outcome.</p>
   </div>
 </section>
 
